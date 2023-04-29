@@ -2,11 +2,32 @@
 <html>
 <head>
 <title>Todo App </title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Comfortaa:wght@300;400&family=Inspiration&family=Kanit:wght@300;400&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <style>
+  body{
+    background-color: rgb(30,0,77);
+    font-family: 'Comfortaa', cursive;
+  } 
+  .task{
+    display: flex;
+    background-color: white;
+    padding: 5px;
+    border-bottom: solid black 1px;
+    transition:box-shadow 0.2s;
+  }
+  
+  .task:hover{
+    box-shadow: 0px 3px 15px rgba(97,97,97,0.843);
+  }
+
   .tasks-table{
-    background-color : green;
+    background-color : rgb(239,239,239);
     width : 60%;
-    height : 500px;
+   /* height : 500px;*/
+    margin-top:120px;
   }
   button{
     border:none;
@@ -17,22 +38,59 @@
     width:40px;
     height:40px;
     border-radius:50%;
+    line-height: 0;
   }
-  
 </style>
 </head>
 <body>
-   <div>
+   <div style="direction:rtl;"> <!-- right to left in all content -->
       <!-- Center div -->
       <div style="display:flex; justify-content:center; align-items:center;">
          <!-- Tasks table -->
          <div class="tasks-table">
             <!-- Header -->
-            <div style="width:100; text-align:center; background:rgb(92,52,155); color:white; padding: 8px;">
-               <h1 style="display:inline;"> My To Do </h1>
-               <button  class ="circul" style="float:right;background:white;margin-right:10px;">add</button>
+            <div style="width:100; text-align:center; background:rgb(92,52,155);
+                        color:white; padding:8px;">
+               <h1 style="display:inline; font-family: 'Inspiration', cursive;"> My Todo List </h1>
+               <button  class ="circul" style="float:right;background:white;margin-right:10px;">
+                   <span class="material-symbols-outlined">add</span>
+               </button>
             </div>
             <!--// Header //-->
+            
+            <!--Tasks -->
+            <div class="tasks" style="padding:20px;">
+                <!-- Task -->
+                <div class="task">
+                    <!-- Tasks info -->
+                    <div style="width:70%;">
+                        <h2> Reading books </h2>
+                        <div>
+                            <span class="material-symbols-outlined">calendar_month</span>
+                            <span>
+                                10/10/2010
+                            </span>
+                        </div>
+                    </div>
+                    <!--// Tasks info //-->
+                    
+                    <!-- Tasks actions -->
+                    <div style="display:flex; justify-content:space-between; align-items:center; width:27%;">
+                        <button  class ="circul" style="background-color: rgb(164,0,0); color:white;">
+                            <span class="material-symbols-outlined">delete</span>
+                        </button>
+                        <button  class ="circul" style="background-color: rgb(0,150,30);  color:white;">
+                            <span class="material-symbols-outlined">check_circle</span> 
+                        </button>
+                        <button  class ="circul" style="background-color: rgba(0,16,197,0.492);  color:white;">
+                            <span class="material-symbols-outlined">edit_note</span>
+                        </button>              
+                    </div>
+                    <!--// Tasks actions //-->
+                </div>
+                <!--// Task //-->
+            </div>
+            <!--// Tasks //-->
          </div>
          <!--// Tasks table //-->
       </div>
