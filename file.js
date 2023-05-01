@@ -14,18 +14,19 @@ let tasks =[
     {
         "title":"Js cours",
         "date":"15/12/2023",
-        "isDone": false
+        "isDone": true
     },
 ];
 
 //document.getElementById("tasks").innerHTML="<h2>Hello world</h2>";
+
 function showData(tasks){
 document.getElementById("tasks").innerHTML="";
 let index = 0;
 for(task of tasks){
     let content = `
             <!-- Task -->
-                <div class="task">
+                <div class="task ${task.isDone ? 'done' : ''}">
                     <!-- Tasks info -->
                     <div style="width:70%;">
                         <h2> ${task.title} </h2>
@@ -43,10 +44,17 @@ for(task of tasks){
                         <button onclick="deleteTask(${index});"  class ="circul" style="background-color: rgb(164,0,0); color:white;">
                             <span class="material-symbols-outlined">delete</span>
                         </button>
-                        <button  class ="circul" style="background-color: rgb(0,150,30);  color:white;">
+                        ${task.isDone ? `
+                        <button onclick="checkTask(${index});"  class ="circul" style="background-color: rgb(244,100,30);  color:white;">
+                            <span class="material-symbols-outlined">cancel</span> 
+                        </button>
+                        ` : `
+                        <button onclick="checkTask(${index});"  class ="circul" style="background-color: rgb(0,150,30);  color:white;">
                             <span class="material-symbols-outlined">check_circle</span> 
                         </button>
-                        <button  class ="circul" style="background-color: rgba(0,16,197,0.492);  color:white;">
+                        `}
+                        
+                        <button  onclick="editItem(${index});" class ="circul" style="background-color: rgba(0,16,197,0.492); color:white;">
                             <span class="material-symbols-outlined">edit_note</span>
                         </button>              
                     </div>
@@ -66,11 +74,11 @@ showData(tasks);
 let btnAdd = document.getElementById("btn-add");
 
 btnAdd.addEventListener("click",function(){
-    //console.log("ok");
+    console.log("ok");
     let data = prompt("Type here ");
     //let conf = confirm("Confirm or Cancel");
     //console.log(data);
-    console.log("data is : ",data);
+    //console.log("data is : ",data);
     // create date 
     let now = new Date();
     // month + 1 => count start from O !!
@@ -92,7 +100,7 @@ function deleteTask(index){
     //console.log(index);
     let task = tasks[index];
     let isConfirmed = confirm("Delete this : "+task.title);
-    
+    // isConfirmed => isConfirmed == true 
     if(isConfirmed){
     // splice (indexToDelete, Number_Of_Items_To_Delete_Start_From_Index)
     tasks.splice(index,1);
@@ -100,8 +108,26 @@ function deleteTask(index){
      }
 }
 
+// edit items 
+function editItem(index){
+    let task = tasks[index];
+    let newData = prompt("Edit : ",task.title);
+    //console.log(task.title);
+    task.title=newData;
+    let now = new Date();
+    let date = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`;
+    task.date=date;
+    showData(tasks);
+}
+// check isDone
 
-
-
-
-
+function checkTask(index){
+    let task = tasks[index];
+    task.isDone=!task.isDone;
+    //if(task.isDone){
+    //    task.isDone = false;
+    //}else{
+    //    task.isDone = true;
+    //}
+    showData(tasks);
+}
