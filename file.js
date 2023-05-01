@@ -18,6 +18,22 @@ let tasks =[
     },
 ];
 
+// local Storage 
+
+function getTasksFromStorage(){
+    let checkTasks = JSON.parse(localStorage.getItem("myTasks"));
+    //if(checkTasks == null){
+    //    tasks = [];
+    //}else{
+    //    tasks = checkTasks;
+    //} 
+    
+    // --- 2 method ---
+    tasks = checkTasks ?? [] ;
+}
+
+getTasksFromStorage();
+
 //document.getElementById("tasks").innerHTML="<h2>Hello world</h2>";
 
 function showData(tasks){
@@ -90,7 +106,9 @@ btnAdd.addEventListener("click",function(){
         "isDone": false
     };
     tasks.push(test);
-    console.log(tasks);
+    //console.log(tasks);
+    // local Storage 
+    storeTasks();
     showData(tasks);
 });
 
@@ -104,6 +122,7 @@ function deleteTask(index){
     if(isConfirmed){
     // splice (indexToDelete, Number_Of_Items_To_Delete_Start_From_Index)
     tasks.splice(index,1);
+    storeTasks();
      showData(tasks);
      }
 }
@@ -117,6 +136,7 @@ function editItem(index){
     let now = new Date();
     let date = `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`;
     task.date=date;
+    storeTasks();
     showData(tasks);
 }
 // check isDone
@@ -129,5 +149,13 @@ function checkTask(index){
     //}else{
     //    task.isDone = true;
     //}
+    storeTasks();
     showData(tasks);
+}
+
+// Storage functions :
+
+function storeTasks(){
+    let tasksToString = JSON.stringify(tasks);
+    localStorage.setItem("myTasks",tasksToString);
 }
